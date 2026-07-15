@@ -288,16 +288,9 @@ const URGENCY_OPTS = [
 ];
 /* ---- Timeline scale, reused by both (also unscored-ish but kept in score to reward readiness) ---- */
 const TIMELINE_OPTS = [
-  ["Yes", 10],
+  ["Yes now", 10],
   ["No", 1],
   ["Yes, in…", 7, {fillIn:true, placeholder:"type when e.g. 2 weeks, next term"}]
-];
-/* ---- Budget readiness, reused ---- */
-const BUDGET_OPTS = [
-  ["Budget is ready — we can start immediately", 10],
-  ["Budget can be arranged once we see a proposal", 6],
-  ["We'd need to plan/raise funds first", 3],
-  ["No budget conversation yet", 0]
 ];
 
 /* ===================== DEFINITIONS ===================== */
@@ -325,55 +318,47 @@ const ASSESSMENTS = {
     /* 10 major scored questions, 10 pts each = 100 */
     questions:[
       { id:"q1", max:10, goal:["pain"], type:"radio",
-        title:"Biggest headache", sub:"What is the single biggest operational headache in the school right now?",
-        label:"Which one is hurting you the most? Tick it:",
-        options:[
-          ["Chasing unpaid / late school fees", 2],
-          ["Slow, manual result computation", 3],
-          ["Scattered student records & attendance", 4],
-          ["Reaching parents / poor communication", 5],
-          ["Low admissions / weak online and offline visibility", 6],
-          ["We're fairly smooth — mostly want to modernise", 10]
+        title:"Biggest headache", sub:"What is the single biggest operational headache in your school right now?",
+        label:"is it?:",
+        options:["unpaid school fees", 2,"Slow, manual result computation", 3,"Scattered student records & attendance", 4"parents are not corporating with the school ", 5,"Low admissions or", 6,"weak online and offline visibility", 10]
         ]},
       { id:"q2", max:10, goal:["pain","need"], type:"checkbox", cap:10, invert:true,
-        title:"Manual today", sub:"Which of these are still done manually or on paper? (each one ticked = a gap)",
-        label:"Is it still done by hand? Tick all that apply:",
-        options:["Fee collection & tracking","Result / report cards","Student records","Attendance","Parent communication","Payroll / staff records"] },
+        title:"Manual today", sub:"Which of these are still done manually or on paper in your school?",
+        label:"Do you still:",
+        // options:["collect fee & track payment on payper?","Do you still prepare result and issue report cards on paper?","what about student records, do you still prepare them manually on paper?","Do you still take attendance manually on paper register?","Parent communication, is that also done manually on paper?"," and staff Payroll and records system, is also manual?"] },
       { id:"q3", max:10, goal:["pain"], type:"radio",
-        title:"Fee delays", sub:"How many parents delay school fees?",
-        label:"How many parents delay fees? Tick one:",
+        title:"Fee delays", sub:"How many parents delay school fees payment in your school?,
+        label:"is it? Tick one:",
         options:[["More than 50%",1],["30–50%",3],["10–30%",6],["Under 10%",10]] },
       { id:"q4", max:10, goal:["need","build"], type:"radio",
-        title:"Fee installments", sub:"Will an installment fee-collection engine that makes it easy for parents to pay fees gradually and quickly before the end of a term help?",
-        label:"Will it help your fee collection? Tick one:",
+        title:"Fee installments", sub:"Will a digital installment fee-collection engine that makes it easy for parents to pay fees gradually and quickly before the end of a term help?",
+        label:"(Dont read the options out to the respondant, only the appropraite after their response) Tick one:",
         options:[["Yes — this alone would change our finances",10],["Probably helps",6],["Maybe",3],["No",0]] },
       { id:"q5", max:10, goal:["pain","need"], type:"radio",
         title:"Results turnaround", sub:"How long does result computation currently take?",
-        label:"How long does it take? Tick one:",
-        options:[["Longer than two weeks",1],["About two weeks",3],["About one week",6],["Same day / already automated",10]] },
+        label:"is it? Tick one:",
+        options:[["Longer than two weeks",1],[" or about two weeks",3],["or about one week",6],["or same day",10]] },
       { id:"q6", max:10, goal:["build"], type:"checkbox", cap:10,
-        title:"What to build", sub:"Which systems would you most want Vortexedge to build for the school?",
-        label:"What should Vortexedge build for you? Tick all you want:",
-        options:["School website + Google presence","Online result portal","Parent portal (fees, attendance, results)","CBT / online exams","Payroll & staff attendance","AI insights (performance, fee forecasting, chatbot)"] },
+        title:"What to build", sub:"Which systems would you most want us to build for your school?",
+        label:"is it? Tick all you want:",
+        options:["School website and Google presence"," or just online result portal","or a parent portal (for them to see their children's outstanding fees, daily attendance, performance and results)","or would you want us to build an online exams portal for you?","Or a digital Payroll & staff attendance system"," Or an AI insights ( that tracks performance, fee collection, ot act as assitant to student, parent and the school)"] },
       { id:"q7", max:10, goal:["need"], type:"checkbox", cap:10, custom:true,
-        title:"Parent channels", sub:"How do you reach parents today? (better channels score higher)",
-        label:"How do you reach them today? Tick all in use:",
-        options:[["Printed letters",1],["Phone calls",2],["SMS",5],["Email",6],["WhatsApp",10]] },
+        title:"Parent channels", sub:"How do you reach parents in your school? ",
+        label:"is it by? Tick all in use:",
+        options:[["Printed letters",1],["Phone calls",2],["SMS",5],["Email",6],["or by WhatsApp",10]] },
       { id:"q8", max:10, goal:["urgency"], type:"radio",
-        title:"Desperation", sub:"How badly do you need a solution to your biggest headache?",
-        label:"How badly do you need this fixed? Tick one:",
+       /* one short optional essay for the true pain point in their words */
+    essay:{ id:"painNote", label:"In one line — describe the problem you want us to solve the most in this school? (optional).", placeholder:"e.g. Fees come in late and we can't plan salaries." },
+       title:"Desperation", sub:"How badly do you need this fixed?",
+        label:"Tick one:",
         options:URGENCY_OPTS },
       { id:"q9", max:10, goal:["timeline"], type:"radio",
-        title:"Timeline", sub:"Would you want Vortexedge to solve your biggest headache now?",
-        label:"Would you want it solved now? Tick one:",
+        title:"Timeline", sub:"we have the capacity to start tomorrow",
+        label:"just let us know when and we will act, Tick one:",
         options:TIMELINE_OPTS },
       { id:"q10", max:10, goal:["timeline","need"], type:"radio",
-        title:"Budget readiness", sub:"How ready is budget for this?",
-        label:"Is the budget ready? Tick one:",
-        options:BUDGET_OPTS }
     ],
-    /* one short optional essay for the true pain point in their words */
-    essay:{ id:"painNote", label:"In one line — describe the problem you most want solved (optional).", placeholder:"e.g. Fees come in late and we can't plan salaries." },
+    
     /* build map: which options across questions imply which deliverable */
     packages:{
       "Starter School":{cut:30, desc:"For schools starting out: a real web presence, admissions flow and structured parent communication.",
