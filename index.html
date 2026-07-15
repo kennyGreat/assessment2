@@ -320,9 +320,13 @@ const ASSESSMENTS = {
       { id:"q1", max:10, goal:["pain"], type:"radio",
         title:"Biggest headache", sub:"What is the single biggest operational headache in your school right now?",
         label:"is it?:",
-        options:["unpaid school fees", 2,"Slow, manual result computation", 3,"Scattered student records & attendance", 4"parents are not corporating with the school ", 5,"Low admissions or", 6,"weak online and offline visibility", 10]
-        ]},
-      { id:"q2", max:10, goal:["pain","need"], type:"checkbox", cap:10, invert:true,
+        options:[
+          ["Chasing unpaid / late school fees", 2],
+          ["Slow, manual result computation", 3],
+          ["Scattered student records & attendance", 4],
+          ["Reaching parents / poor communication", 5],
+          ["Low admissions / weak online and offline visibility", 6],
+
         title:"Manual today", sub:"Which of these are still done manually or on paper in your school?",
         label:"Do you still:",
         // options:["collect fee & track payment on payper?","Do you still prepare result and issue report cards on paper?","what about student records, do you still prepare them manually on paper?","Do you still take attendance manually on paper register?","Parent communication, is that also done manually on paper?"," and staff Payroll and records system, is also manual?"] },
